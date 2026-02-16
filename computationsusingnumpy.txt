@@ -1,0 +1,8 @@
+import numpy as np
+lst = [10, 20, 30, 40]
+mean = np.mean(lst)
+median = np.median(lst)
+std_dev = np.std(lst)
+print(mean)
+print(median)
+print(std_dev)
