@@ -1,6 +1,8 @@
-n = int(input("Enter a number: "))
+# Program to check even or odd
 
-if n % 2 == 0:
-    print("Even")
+num = int(input("Enter a number: "))
+
+if num % 2 == 0:
+    print("Even number")
 else:
-    print("Odd")
+    print("Odd number")
