@@ -1,29 +1,32 @@
-def matrix_multiply(A, B):
-    rows_A = len(A)
-    cols_A = len(A[0])
-    rows_B = len(B)
-    cols_B = len(B[0])
-
-    if cols_A != rows_B:
-        return "Matrix multiplication not possible"
-
-    result = [[0 for _ in range(cols_B)] for _ in range(rows_A)]
-
-    for i in range(rows_A):
-        for j in range(cols_B):
-            for k in range(cols_A):
-                result[i][j] += A[i][k] * B[k][j]
-
-    return result
-
-
-A = [[1, 2, 3],
-     [4, 5, 6]]
-
-B = [[7, 8],
-     [9, 10],
-     [11, 12]]
-
-print("Result:")
-for row in matrix_multiply(A, B):
+def multiply_matrices(mat1, mat2):
+  rows1 = len(mat1)
+  cols1 = len(mat1[0])
+  rows2 = len(mat2)
+  cols2 = len(mat2[0])
+# Check if multiplication is possible
+if cols1 != rows2:
+  return "Matrix multiplication is not possible. Number of column
+result = [[0 for _ in range(cols2)] for _ in range(rows1)]
+# Perform matrix multiplication
+for i in range(rows1):
+  for j in range(cols2):
+    for k in range(cols1):
+      result[i][j] += mat1[i][k] * mat2[k][j]
+return result
+# Example matrices
+matrix1 = [[1, 2, 3],
+           [4, 5, 6]]
+matrix2 = [[7, 8],
+           [9, 
+10],
+           [11, 
+12]]
+# Multiply the matrices
+result_matrix = multiply_matrices(matrix1, matrix2)
+# Display the result
+if isinstance(result_matrix, str):
+  print(result_matrix)
+else:
+  print("Result of matrix multiplication:")
+  for row in result_matrix:
     print(row)
