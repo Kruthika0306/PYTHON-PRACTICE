@@ -1,43 +1,48 @@
-# Prim's Algorithm in Python
+import heapq
 
-def prims(graph, n):
-    selected = [False] * n   # Track selected vertices
-    selected[0] = True       # Start from vertex 0
+def prims_algorithm(graph, start):
+    """
+    graph: adjacency list representation
+           { node: [(weight, neighbor), ...] }
+    start: starting node
+    """
 
-    edges = 0
-    print("Edge : Weight\n")
+    visited = set()
+    min_heap = [(0, start)]  # (weight, node)
+    total_cost = 0
+    mst = []
 
-    # Loop until we get n-1 edges
-    while edges < n - 1:
-        minimum = float('inf')
-        x = 0
-        y = 0
+    while min_heap:
+        weight, node = heapq.heappop(min_heap)
 
-        for i in range(n):
-            if selected[i]:
-                for j in range(n):
-                    if (not selected[j]) and graph[i][j]:
-                        if minimum > graph[i][j]:
-                            minimum = graph[i][j]
-                            x = i
-                            y = j
+        if node in visited:
+            continue
 
-        print(f"{x} - {y} : {graph[x][y]}")
-        selected[y] = True
-        edges += 1
+        visited.add(node)
+        total_cost += weight
+
+        if weight != 0:
+            mst.append((node, weight))
+
+        for edge_weight, neighbor in graph[node]:
+            if neighbor not in visited:
+                heapq.heappush(min_heap, (edge_weight, neighbor))
+
+    return total_cost, mst
 
 
-# Number of vertices
-n = 5
+# Example graph
+graph = {
+    'A': [(2, 'B'), (3, 'C')],
+    'B': [(2, 'A'), (1, 'C'), (4, 'D')],
+    'C': [(3, 'A'), (1, 'B'), (5, 'D')],
+    'D': [(4, 'B'), (5, 'C')]
+}
 
-# Adjacency Matrix
-graph = [
-    [0, 2, 0, 6, 0],
-    [2, 0, 3, 8, 5],
-    [0, 3, 0, 0, 7],
-    [6, 8, 0, 0, 9],
-    [0, 5, 7, 9, 0]
-]
+# Run Prim's Algorithm
+cost, mst = prims_algorithm(graph, 'A')
 
-# Call function
-prims(graph, n)
+print("Minimum Cost:", cost)
+print("Edges in MST:")
+for edge in mst:
+    print(edge)
