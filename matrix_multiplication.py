@@ -3,7 +3,6 @@ def multiply_matrices(mat1, mat2):
   cols1 = len(mat1[0])
   rows2 = len(mat2)
   cols2 = len(mat2[0])
-# Check if multiplication is possible
 if cols1 != rows2:
   return "Matrix multiplication is not possible. Number of column
 result = [[0 for _ in range(cols2)] for _ in range(rows1)]
